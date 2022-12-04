@@ -22,7 +22,7 @@ class Pedido {
                 .reduce(totalMaisTaxas, BigDecimal::add);
     }
 
-    public BigDecimal totalMaisTaxas() {
+    public BigDecimal totalComImpostos() {
         return totalMaisTaxas;
     }
 }

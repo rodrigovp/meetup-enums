@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static br.org.rodnet.meetupEnums.dominio.ImpostoEnum.PIS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PISTest {
@@ -12,9 +13,7 @@ class PISTest {
     void aplicarSobreValor(){
         var cemReais = BigDecimal.valueOf(100);
         var tresReais = BigDecimal.valueOf(3);
-        var pis = new PIS();
 
-        BigDecimal valorDoImposto = pis.aplicar(cemReais);
-        assertThat(valorDoImposto).isEqualTo(tresReais);
+        assertThat(PIS.aplicar(cemReais)).isEqualTo(tresReais);
     }
 }

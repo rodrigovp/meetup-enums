@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static br.org.rodnet.meetupEnums.dominio.ImpostoEnum.*;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +28,7 @@ class PedidoTest {
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
 
-        pedido.aplicar(new ISS());
+        pedido.aplicar(ISS);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
@@ -40,7 +41,7 @@ class PedidoTest {
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
 
-        pedido.aplicar(new ISS(), new ICMS());
+        pedido.aplicar(ISS, ICMS);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
@@ -53,7 +54,7 @@ class PedidoTest {
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
 
-        pedido.aplicar(new ISS(), new ICMS(), new PIS());
+        pedido.aplicar(ISS, ICMS, PIS);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);

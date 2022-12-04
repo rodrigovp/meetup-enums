@@ -23,40 +23,40 @@ class PedidoTest {
 
     @Test
     void aplicarUmImposto(){
-        var totalMaisTaxas = total.add(ONE);
+        var totalMaisImpostos = total.add(ONE);
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
+        assertThat(pedido.totalComImpostos()).isEqualTo(total);
 
         pedido.aplicar(ISS);
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
+        assertThat(pedido.totalComImpostos()).isEqualTo(totalMaisImpostos);
     }
 
     @Test
     void aplicarDoisImpostos(){
-        var totalMaisTaxas = total.add(valueOf(3));
+        var totalMaisImpostos = total.add(valueOf(3));
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
+        assertThat(pedido.totalComImpostos()).isEqualTo(total);
 
         pedido.aplicar(ISS, ICMS);
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
+        assertThat(pedido.totalComImpostos()).isEqualTo(totalMaisImpostos);
     }
 
     @Test
     void aplicarTodosImpostos(){
-        var totalMaisTaxas = total.add(valueOf(6));
+        var totalMaisImpostos = total.add(valueOf(6));
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
+        assertThat(pedido.totalComImpostos()).isEqualTo(total);
 
         pedido.aplicar(ISS, ICMS, PIS);
 
         assertThat(pedido.total()).isEqualTo(total);
-        assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
+        assertThat(pedido.totalComImpostos()).isEqualTo(totalMaisImpostos);
     }
 }

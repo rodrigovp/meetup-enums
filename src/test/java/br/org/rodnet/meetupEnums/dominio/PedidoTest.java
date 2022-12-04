@@ -1,19 +1,28 @@
 package br.org.rodnet.meetupEnums.dominio;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PedidoTest {
 
+    private Pedido pedido;
+    private BigDecimal total;
+
+    @BeforeEach
+    void setUp(){
+        total = valueOf(100);
+        pedido = new Pedido(total);
+    }
+
     @Test
     void aplicarUmImposto(){
-        var total = valueOf(100);
-        var totalMaisTaxas = total.add(BigDecimal.ONE);
-        var pedido = new Pedido(total);
+        var totalMaisTaxas = total.add(ONE);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
@@ -26,15 +35,12 @@ class PedidoTest {
 
     @Test
     void aplicarDoisImpostos(){
-        var total = valueOf(100);
         var totalMaisTaxas = total.add(valueOf(3));
-        var pedido = new Pedido(total);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
 
-        pedido.aplicar(new ISS());
-        pedido.aplicar(new ICMS());
+        pedido.aplicar(new ISS(), new ICMS());
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);
@@ -42,16 +48,12 @@ class PedidoTest {
 
     @Test
     void aplicarTodosImpostos(){
-        var total = valueOf(100);
         var totalMaisTaxas = total.add(valueOf(6));
-        var pedido = new Pedido(total);
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(total);
 
-        pedido.aplicar(new ISS());
-        pedido.aplicar(new ICMS());
-        pedido.aplicar(new PIS());
+        pedido.aplicar(new ISS(), new ICMS(), new PIS());
 
         assertThat(pedido.total()).isEqualTo(total);
         assertThat(pedido.totalMaisTaxas()).isEqualTo(totalMaisTaxas);

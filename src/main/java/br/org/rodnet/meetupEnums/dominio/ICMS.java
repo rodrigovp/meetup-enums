@@ -2,6 +2,7 @@ package br.org.rodnet.meetupEnums.dominio;
 
 import java.math.BigDecimal;
 
+import static br.org.rodnet.meetupEnums.dominio.Calculadora.porcentagem;
 import static java.math.BigDecimal.valueOf;
 
 /**
@@ -10,6 +11,6 @@ import static java.math.BigDecimal.valueOf;
 class ICMS implements Imposto {
     @Override
     public BigDecimal aplicar(BigDecimal valor) {
-        return valor.divide(valueOf(100)).multiply(valueOf(2));
+        return porcentagem(valueOf(2), valor);
     }
 }

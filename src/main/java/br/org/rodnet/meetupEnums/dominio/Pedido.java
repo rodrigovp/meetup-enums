@@ -2,6 +2,8 @@ package br.org.rodnet.meetupEnums.dominio;
 
 import java.math.BigDecimal;
 
+import static java.util.Arrays.stream;
+
 class Pedido {
 
     private BigDecimal total;
@@ -13,8 +15,11 @@ class Pedido {
     public BigDecimal total() {
         return total;
     }
-    public void aplicar(Imposto imposto) {
-        totalMaisTaxas = totalMaisTaxas.add(imposto.aplicar(total));
+
+    public void aplicar(Imposto ... impostos){
+        totalMaisTaxas = stream(impostos)
+                .map(imposto -> imposto.aplicar(total))
+                .reduce(totalMaisTaxas, BigDecimal::add);
     }
 
     public BigDecimal totalMaisTaxas() {
